@@ -15,19 +15,17 @@ You will need an OpenAI API key.
 - Enter your key by adding this line in the configuration file: `<OPENAIKey data="put_your_key_here" />`.
 - Add the following line to enable the different available GPT models: `<OPENAIModel data="gpt-4o gpt4-turbo gpt-3.5-turbo" />`.
 
-## 3. Downloading the Models
-The models are available in this archive: [Zenodo Archive](https://doi.org/10.5281/zenodo.11936922), in the `incoherencies` directory. In this directory, you will find the three specifications used for our case studies (markdown files) and four TTool models (XML files).
 
-## 4. Replicating Our Results
+## 3. Replicating Our Results
 
-### 4.1. Opening the Models
+### 3.1. Opening the Models
 - Launch TTool:
 ```bash
 ./ttool.exe
 ```
 - Click on `File > Open Model` and browse your local copy of the Zenodo repository, `incoherencies` directory, and choose a model, e.g., `spacebasedsystem.xml`. You will see several tabs: `BD1` and `BD2` correspond to the two input block diagrams, and in the `UCD` tab, the subtabs `UCD1` and `UCD2` correspond to the two input sequence diagrams. The other tabs correspond to the models corrected by the framework: `BDx_UCDy` contains the block diagram x modified by taking into account the inconsistencies detected by comparing it with the use-case diagram y.
 
-### 4.2. Replicating the Inconsistencies Detection
+### 3.2. Replicating the Inconsistencies Detection
 Select a block diagram (BD1 or BD2), make a right click, "to textual format". Do the same for UCD1 or UCD2.
 
 Now, open the AI window (use the icon on the right depicting a brain), then select "Identify incoherencies". In the question box, put:
@@ -79,7 +77,7 @@ AI: json
 Note: reproducing this exact list of incoherencies is not possible since ChatGPT introduces randomness among the most probable results.
 
 
-### 4.3. Updating diagrams from incoherencies
+### 3.3. Updating diagrams from incoherencies
 
 Imagine that you now wish to update the block diagram considering these inconsistencies. Open the AI window of TTool. Select at the top "system blocks". In the question field, put:
 - "Specification:" followed with the system specification
@@ -99,7 +97,7 @@ Do correct incoherency 1-5 to propose a new block diagram.
 Click on start, wait. Then click on apply, and reorganize the blocks ot improve their graphical representation: you should have a readable updated Block Diagram.
 
 
-### 4.4. Trying our framework on your own models
+### 3.4. Trying our framework on your own models
 You can also test our framework using diagrams you have created yourself with TTool. If you want to generate these diagrams using TTool-AI, follow these steps:
 1. Copy and paste the desired specification into the TTool-AI window.
 2. Select either `Identify use cases` or `Identify system blocks`.
