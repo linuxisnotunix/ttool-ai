@@ -1,51 +1,33 @@
-This repository contains a few examples on how TTool and ChatGPT perform.
+# Detailed Instructions for Installing Our Framework, Replicating Our Results, and Using It on Other Models
 
-# Directory organization
+## 1. Installing TTool(-AI)
+First, you need to install TTool. You will find detailed instructions [here](https://ttool.telecom-paris.fr/installation.html). We recommend downloading and compiling it from the source code available on its GitLab repository:
+```bash
+git clone https://gitlab.telecom-paris.fr/mbe-tools/TTool.git
+cd TTool
+make ttool-cli && make ttoolnotest
+make install
+```
 
-There are three subdirectories. Each one contains a desc file, with the system specification, and a TTool file featuring five outputs produced by TTool + ChatGPT 3.5, with NO human modification, apart from a better placement of graphical components.
+## 2. Configuring TTool-AI
+You will need an OpenAI API key.
+- Open the TTool configuration file: `./bin/config.xml`.
+- Enter your key by adding this line in the configuration file: `<OPENAIKey data="put_your_key_here" />`.
+- Add the following line to enable the different available GPT models: `<OPENAIModel data="gpt-4o gpt4-turbo gpt-3.5-turbo" />`.
 
-The main directory also contains this README and the results in results.ods: these results give the time to obtain the diagrams, and their quality. This quality is compared with one of the diagrams made by master-level students after 21h of lectures ands labs.
+## 3. Downloading the Models
+The models are available in this archive: [Zenodo Archive](https://doi.org/10.5281/zenodo.11936922), in the `incoherencies` directory. In this directory, you will find the three specifications used for our case studies (markdown files) and four TTool models (XML files).
 
-# Model generation
+## 4. Replicating Our Results
 
-## How to look at the models we have obtained?
+### 4.1. Opening the Models
+- Launch TTool:
+```bash
+./ttool.exe
+```
+- Click on `File > Open Model` and browse your local copy of the Zenodo repository, `incoherencies` directory, and choose a model, e.g., `spacebasedsystem.xml`. You will see several tabs: `BD1` and `BD2` correspond to the two input block diagrams, and in the `UCD` tab, the subtabs `UCD1` and `UCD2` correspond to the two input sequence diagrams. The other tabs correspond to the models corrected by the framework: `BDx_UCDy` contains the block diagram x modified by taking into account the inconsistencies detected by comparing it with the use-case diagram y.
 
-- You first need to install TTool
-- Then, with TTool, open one of the .xml files located in the subdirectory. For instance, to look at the platooning model, open platooning/platoonings.xml 
-
-## How to reproduce the results?
-
-- You first need to install TTool
-- You then need to get a valid OPENAI key
-- You need to change the config.xml file of your TTool installation (see https://ttool.telecom-paris.fr/ttoolai.html):
-
-Add this (and correctly set your key):
-<OPENAIKey data="your key/>
-<OPENAIModel data="gpt-3.5-turbo gpt-4-0125-preview"/> 
-
-- You can start TTool, and use the AI dialog windows. There, you put the system specification in the question area, and you have to select, to identify blocks: "Identify system blocks (knowledge type #2 with slicing) - Provide a system specification". Then, click on start.
-
-Once the blocks have been determined, click on "apply response", and close the AI window.
-
-- To identify state machines: select a block diagram, open the AI window, put in the question field the system specification, and select "Identify state machines and attributes - Select a block diagram. Additionally, you can provide a system specification". Click on start. Once state machine have been computed, select "apply response". You should now have both block and state machine diagrams.
-
-Since ChatGPT is based on randomness to produce the results, it is very likely you will get results different from ours. Try several times to figure out the differences you may obtain.
-
-
-# Incoherency detection and correction
-
-- Go to "incoherencies" directory
-- There, there are 3 .xml files to be opened with TTool. Do configure TTool as explained before in the "model generation" section.
-
- ## Model content
- Each file contains 2 block diagrams (BD) and 2 Use case diagrams (UCD) automatically generated using the system specification. They also contain the  models corrected thansk to the detection of incoherencies. These incoherencies are given in the updated models.
-
-## How to reproduce the results?
-
-Let us assume that you have opened with TTool a model, for instance spacebasedystem.xml. We assume that TTool is correcly configured to use ChatGPT.
-
-### Detecting incoherencies between diagrams
-
+### 4.2. Replicating the Inconsistencies Detection
 Select a block diagram (BD1 or BD2), make a right click, "to textual format". Do the same for UCD1 or UCD2.
 
 Now, open the AI window (use the icon on the right depicting a brain), then select "Identify incoherencies". In the question box, put:
@@ -94,8 +76,10 @@ AI: json
   ]
 }
 ```
+Note: reproducing this exact list of incoherencies is not possible since ChatGPT introduces randomness among the most probable results.
 
-### Updating diagrams from incoherencies
+
+### 4.3. Updating diagrams from incoherencies
 
 Imagine that you now wish to update the block diagram considering these inconsistencies. Open the AI window of TTool. Select at the top "system blocks". In the question field, put:
 - "Specification:" followed with the system specification
@@ -112,11 +96,16 @@ Do correct the block diagram considering the following incoherencies:
 Do correct incoherency 1-5 to propose a new block diagram.
 
 ```
-Click on start, wait. Then click on apply, and reorganize the blocks: you should have an updated Block Diagram.
+Click on start, wait. Then click on apply, and reorganize the blocks ot improve their graphical representation: you should have a readable updated Block Diagram.
 
 
+### 4.4. Trying our framework on your own models
+You can also test our framework using diagrams you have created yourself with TTool. If you want to generate these diagrams using TTool-AI, follow these steps:
+1. Copy and paste the desired specification into the TTool-AI window.
+2. Select either `Identify use cases` or `Identify system blocks`.
+3. Click on `Start`.
+4. Once the LLM has responded, click on `Apply response`.
 
-
-
+And now, follow the steps explained in 4.2 and 4.3 for detecting and correcting inconsistencies.
 
 Enjoy!
