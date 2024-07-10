@@ -9,14 +9,16 @@ make ttool-cli && make ttoolnotest
 make install
 ```
 
+Otherwise, you can install it by downloading its compiled nightly build version [here](https://ttool.telecom-paris.fr/download.html).
+
 ## 2. Configuring TTool-AI
 If you want to use our framework, you will need an OpenAI API key.
-- Open the TTool configuration file: `./bin/config.xml`.
+- Open the TTool configuration file: `./bin/config.xml` or `./bin/config_yourOSFamily.xml` if you have installed the compiled version.
 - Enter your key by adding this line in the configuration file: `<OPENAIKey data="put_your_key_here" />`.
 - Add the following line to enable the different available GPT models: `<OPENAIModel data="gpt-4o gpt4-turbo gpt-3.5-turbo" />`.
 
 ## 3. Downloading the Models
-The models are available in this repository (`xml` files).
+The models (`xml` files) and the specifications used to generate them (`md` files) are available in this repository.
 
 ## 4. Replicating Our Results
 
@@ -33,7 +35,7 @@ First, open the AI window (use the icon on the right depicting a brain), then se
 Then, select a block diagram (BD1 or BD2). To export it in textual format, make a right click and then click on `to textual format`. Do the same for UCD1 or UCD2.
 
 In the question box, put:
-- `Specification:` + the specification of the system
+- `Specification:` + the specification of the system, available in the relevant `md` file (for the Space-Based System, it is in `specification_spacebasedsystem.md`)
 - `Diagram1: Use case diagram.` + the textual format of the UCD you have copied before
 - `Diagram2: Block diagram.` + the textual format of the BD you have copied before
 
