@@ -27,7 +27,7 @@ The models (`xml` files) and the specifications used to generate them (`md` file
 ```bash
 ./ttool.exe
 ```
-- Click on `File > Open Model` and browse your local copy of the repository and choose a model, e.g., `spacebasedsystem.xml`. You will see several tabs: `BD1` and `BD2` correspond to the two input block diagrams, and in the `UCD` tab, the subtabs `UCD1` and `UCD2` correspond to the two input sequence diagrams. The other tabs correspond to the models corrected by the framework: `BDx_UCDy` contains the block diagram x modified by taking into account the inconsistencies detected by comparing it with the use-case diagram y.
+- Click on `File > Open Model` and browse your local copy of the repository and choose a model, e.g., `spacebasedsystem.xml`. You will see several tabs: `BD1` and `BD2` correspond to the two input block diagrams, and in the `UCD` tab, the subtabs `UCD1` and `UCD2` correspond to the two input use case diagrams. The other tabs correspond to the models corrected by the framework: `BDx_UCDy` contains the block diagram x modified by taking into account the inconsistencies detected by comparing it with the use-case diagram y.
 
 ### 4.2. Replicating the Inconsistencies Detection
 First, open the AI window (use the icon on the right depicting a brain), then select `Diagram coherency` or `Diagram coherency with formal rules`. You can also choose a GPT model: we recommend using GPT-4-turbo, or GPT-4o.
@@ -111,8 +111,20 @@ Click on `Start` and wait. Then (make sure the TTool window is opened on the new
 
 
 ### 4.4. Trying our framework on your own models
-You can also test our framework using diagrams you have created yourself with TTool. If you want to generate these diagrams using TTool-AI, follow these steps:
-1. Copy and paste the desired specification into the TTool-AI window.
+You can also test our framework using diagrams you create with TTool. Here's how to get started:
+#### Creating a Block Diagram
+1. Click on `File` > `New Model`.
+2. Right-click on the main window and select `New Design`.
+3. Use TTool's GUI to start designing your block diagram.
+
+#### Creating a Use Case Diagram
+1. Right-click on the blank space to the right of the upper tab area and select `New Analysis`.
+2. Right-click on the main window and select `New Use Case Diagram`.
+3. Use TTool's GUI to start designing your use case diagram.
+
+#### Generating Diagrams with TTool-AI
+If you want to generate these diagrams using TTool-AI, follow these steps:
+1. After opening new empty diagrams as explained above, copy and paste the desired specification into the TTool-AI window.
 2. Select either `Identify use cases` or `Identify system blocks`.
 3. Click on `Start`.
 4. Once the LLM has responded, click on `Apply response`.
