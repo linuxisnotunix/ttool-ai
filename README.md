@@ -1,7 +1,22 @@
 # Detailed Instructions for Installing Our Framework, Replicating Our Results, and Using It on Other Models
 
 ## 1. Installing TTool(-AI)
-First, you need to install TTool. You will find detailed instructions [here](https://ttool.telecom-paris.fr/installation.html). We recommend downloading and compiling it from the source code available on its GitLab repository:
+
+### 1.1. Pre-requisites
+
+#### Hardware Requirements
+To ensure smooth usage of TTool, especially the embedded model-checker, we recommend installing it on a computer with at least **8GB of RAM**.
+
+#### OS Requirements
+TTool can be installed on **GNU/Linux**, **macOS**, or **Windows**. However, we recommend installing it on a **GNU/Linux** or **macOS** system, as we primarily develop and test it on these two OS families.
+
+#### Software Dependencies
+- **Java Runtime Environment (JRE)**: TTool requires JRE 11 or later. As some minor graphical bugs may occur with OpenJDK, we recommend using Oracle's JRE.
+- **make**: the make utility, provided for instance by GNU, is necessary to compile TTool.
+- **Gradle**: To compile TTool from its source code available on the Git repository, Gradle 7.4.2 or later is recommended, even if TTool's Makefile relies on the _javac_ compiler (for instance, the one provided by Oracle's JDK 11). 
+
+### 1.2. Installing TTool
+You will find detailed installation instructions [here](https://ttool.telecom-paris.fr/installation.html). We recommend downloading and compiling it from the source code available on its GitLab repository:
 ```bash
 git clone https://gitlab.telecom-paris.fr/mbe-tools/TTool.git
 cd TTool
@@ -27,17 +42,17 @@ The models (`xml` files) and the specifications used to generate them (`md` file
 ```bash
 ./ttool.exe
 ```
-- Click on `File > Open Model` and browse your local copy of the repository and choose a model, e.g., `spacebasedsystem.xml`. You will see several tabs: `BD1` and `BD2` correspond to the two input block diagrams, and in the `UCD` tab, the subtabs `UCD1` and `UCD2` correspond to the two input use case diagrams. The other tabs correspond to the models corrected by the framework: `BDx_UCDy` contains the block diagram x modified by taking into account the inconsistencies detected by comparing it with the use-case diagram y.
+- Click on `File > Open Model` and browse your local copy of the repository and choose a model, e.g., `spacebasedsystem.xml`. You will see several tabs: `BD1` and `BD2` correspond to the two input block diagrams, and in the `UCD` (use case diagram) tab, the subtabs `UCD1` and `UCD2` correspond to the two input use case diagrams. The other tabs correspond to the models corrected by the framework: `BDx_UCDy` contains the block diagram x modified by taking into account the inconsistencies detected by comparing it with the use-case diagram y.
 
 ### 4.2. Replicating the Inconsistencies Detection
 First, open the AI window (use the icon on the right depicting a brain), then select `Diagram coherency` or `Diagram coherency with formal rules`. You can also choose a GPT model: we recommend using GPT-4-turbo, or GPT-4o.
 
-Then, select a block diagram (BD1 or BD2). To export it in textual format, make a right click and then click on `to textual format`. Do the same for UCD1 or UCD2.
+Then, open a block diagram (BD1 or BD2) in the main. To export it in textual format, make a right click and then click on `to textual format`. Do the same for UCD1 or UCD2.
 
 In the question box, put:
-- `Specification:` + the specification of the system, available in the relevant `md` file (for the Space-Based System, it is in `specification_spacebasedsystem.md`)
-- `Diagram1: Use case diagram.` + the textual format of the UCD you have copied before
-- `Diagram2: Block diagram.` + the textual format of the BD you have copied before
+- `Specification:` + paste the specification of the system, available in the relevant `md` file (for the Space-Based System, it is in `specification_spacebasedsystem.md`)
+- `Diagram1: Use case diagram.` + the textual format of the UCD. To obtain it, open the desired UCD in the main TTool window by clicking on its tab. Next, either click on `Append current diagram text` in the AI window, or right-click on the UCD, select `to textual format`, and copy-paste the obtained textual diagram in the AI window.
+- `Diagram2: Block diagram.` + the textual format of the BD you can obtain by following the same steps as for the UCD.
 
 The question box should now contain the system specification, then the textual description of the UCD, then the textual description of the BD. Now, click on `Start`. If TTool was able to exchange with ChatGPT, then you should obtain a list of inconsistencies that looks like this:
 
